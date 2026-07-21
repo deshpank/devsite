@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,opsz,wght@0,5..1200,400;0,5..1200,500;0,5..1200,600;1,5..1200,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --paper: #f5f1e8;
+  --paper-raised: #fbf8f2;
+  --ink: #211f1a;
+  --ink-soft: #5a564d;
+  --ink-faint: #8b8677;
+  --moss: #3f5138;
+  --moss-soft: #6b7d61;
+  --gold: #b1802f;
+  --line: rgba(33, 31, 26, 0.13);
+  --line-strong: rgba(33, 31, 26, 0.24);
+
+  --display: 'Playfair Display', 'Georgia', serif;
+  --body: 'Inter', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 500;
+  margin: 0;
+  color: var(--ink);
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.section {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 7rem 2rem;
+  position: relative;
+}
+
+.section-head {
+  margin-bottom: 3.5rem;
+  max-width: 640px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  margin-top: 0.6rem;
+  font-style: italic;
+}
+
+.section-head p {
+  color: var(--ink-soft);
+  margin-top: 1rem;
+  font-size: 1.02rem;
+  max-width: 52ch;
+}
+
+:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 4.5rem 1.4rem;
+  }
+}
