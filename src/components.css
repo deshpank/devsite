@@ -251,6 +251,46 @@
   padding-bottom: 0;
 }
 
+.timeline-item-inner {
+  display: flex;
+  gap: 1.3rem;
+  align-items: flex-start;
+}
+
+.timeline-mark {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--paper-raised);
+  background: var(--mark-color, var(--ink));
+  margin-top: 0.15rem;
+}
+
+.timeline-item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .timeline-mark {
+    width: 36px;
+    height: 36px;
+    font-size: 0.78rem;
+    border-radius: 6px;
+  }
+  .timeline-item-inner {
+    gap: 0.9rem;
+  }
+}
+
 .timeline-node {
   position: absolute;
   left: 0;

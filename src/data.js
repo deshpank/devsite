@@ -12,6 +12,7 @@ export const experience = [
   {
     role: 'Enterprise AI Software Intern',
     org: 'Humana',
+    mark: { text: 'H', color: '#3f5138' },
     date: 'May 2026 — Aug 2026',
     tags: ['LangGraph', 'Azure DevOps', 'Multi-Hop'],
     points: [
@@ -23,6 +24,7 @@ export const experience = [
   {
     role: 'Software Developer',
     org: 'CATME',
+    mark: { text: 'C', color: '#8a6b2f' },
     date: 'Jan 2026 — Present',
     tags: ['Perl', 'SQL', 'Zendesk'],
     points: [
@@ -34,6 +36,7 @@ export const experience = [
   {
     role: 'Research Assistant',
     org: 'Tech Justice Lab — LLM Privacy & Profiling',
+    mark: { text: 'TJ', color: '#3d4f6b' },
     date: 'Nov 2025 — Present',
     tags: ['Privacy Research', 'LLM Agents'],
     points: [
@@ -45,6 +48,7 @@ export const experience = [
   {
     role: 'Student Developer',
     org: 'Dow Chemical — Data Mine Corporate Partners',
+    mark: { text: 'D', color: '#7a3b30' },
     date: 'Aug 2025 — May 2026',
     tags: ['DSPy', 'FastAPI', 'Docker'],
     points: [
@@ -56,6 +60,7 @@ export const experience = [
   {
     role: 'Software Intern',
     org: 'DataGenie',
+    mark: { text: 'DG', color: '#4a4536' },
     date: 'May 2025 — Aug 2025',
     tags: ['n8n', 'Encryption'],
     points: [
