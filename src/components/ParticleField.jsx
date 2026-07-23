@@ -1,5 +1,11 @@
 import { useEffect, useRef } from 'react';
 
+const LAYERS = [
+  { count: 70, minR: 0.6, maxR: 1.2, speed: 0.07, parallax: 6, glow: 3, alpha: [0.2, 0.45] },
+  { count: 45, minR: 1.0, maxR: 1.9, speed: 0.13, parallax: 16, glow: 7, alpha: [0.35, 0.65] },
+  { count: 24, minR: 1.7, maxR: 2.8, speed: 0.2, parallax: 30, glow: 13, alpha: [0.5, 0.9] },
+];
+
 export default function ParticleField() {
   const canvasRef = useRef(null);
 
@@ -9,12 +15,14 @@ export default function ParticleField() {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let width, height, dpr;
-    let particles = [];
+    let layers = [];
     let raf;
-    const mouse = { x: -9999, y: -9999, active: false };
+    let t = 0;
+    const mouse = { x: 0, y: 0, nx: 0, ny: 0, active: false };
 
-    const inkLine = '33, 31, 26';
-    const mossLine = '63, 81, 56';
+    const inkColor = '33, 31, 26';
+    const mossColor = '63, 81, 56';
+    const goldColor = '177, 128, 47';
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -25,15 +33,26 @@ export default function ParticleField() {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      mouse.x = width / 2;
+      mouse.y = height / 2;
 
-      const area = width * height;
-      const count = Math.min(90, Math.max(34, Math.round(area / 16000)));
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        r: Math.random() * 1.6 + 0.6,
+      layers = LAYERS.map((cfg) => ({
+        cfg,
+        stars: Array.from({ length: cfg.count }, () => {
+          const roll = Math.random();
+          const color = roll < 0.1 ? mossColor : roll < 0.16 ? goldColor : inkColor;
+          return {
+            x: Math.random() * width,
+            y: Math.random() * height,
+            r: cfg.minR + Math.random() * (cfg.maxR - cfg.minR),
+            vx: (Math.random() - 0.5) * cfg.speed,
+            vy: (Math.random() - 0.5) * cfg.speed,
+            phase: Math.random() * Math.PI * 2,
+            twinkleSpeed: 0.5 + Math.random() * 1.3,
+            baseAlpha: cfg.alpha[0] + Math.random() * (cfg.alpha[1] - cfg.alpha[0]),
+            color,
+          };
+        }),
       }));
     }
 
@@ -41,81 +60,46 @@ export default function ParticleField() {
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
+      mouse.nx = (mouse.x / width) * 2 - 1;
+      mouse.ny = (mouse.y / height) * 2 - 1;
       mouse.active = true;
     }
 
     function onLeave() {
       mouse.active = false;
-      mouse.x = -9999;
-      mouse.y = -9999;
     }
 
     function step() {
+      t += 0.016;
       ctx.clearRect(0, 0, width, height);
-      const linkDist = 130;
-      const mouseDist = 170;
 
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
+      layers.forEach((layer) => {
+        const { cfg, stars } = layer;
+        const parX = mouse.active ? -mouse.nx * cfg.parallax : 0;
+        const parY = mouse.active ? -mouse.ny * cfg.parallax : 0;
 
-        if (mouse.active) {
-          const dx = p.x - mouse.x;
-          const dy = p.y - mouse.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < mouseDist && dist > 0.01) {
-            const force = (1 - dist / mouseDist) * 0.55;
-            p.vx += (dx / dist) * force * 0.05;
-            p.vy += (dy / dist) * force * 0.05;
-          }
-        }
+        stars.forEach((s) => {
+          s.x += s.vx;
+          s.y += s.vy;
+          if (s.x < -20) s.x = width + 20;
+          if (s.x > width + 20) s.x = -20;
+          if (s.y < -20) s.y = height + 20;
+          if (s.y > height + 20) s.y = -20;
 
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vx *= 0.985;
-        p.vy *= 0.985;
+          const twinkle = 0.55 + 0.45 * Math.sin(t * s.twinkleSpeed + s.phase);
+          const alpha = s.baseAlpha * twinkle;
+          const drawX = s.x + parX;
+          const drawY = s.y + parY;
 
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
-        p.x = Math.max(0, Math.min(width, p.x));
-        p.y = Math.max(0, Math.min(height, p.y));
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${inkLine}, 0.42)`;
-        ctx.fill();
-      }
-
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const a = particles[i];
-          const b = particles[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < linkDist) {
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(${inkLine}, ${0.14 * (1 - dist / linkDist)})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-
-        if (mouse.active) {
-          const dx = a.x - mouse.x;
-          const dy = a.y - mouse.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < mouseDist) {
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = `rgba(${mossLine}, ${0.32 * (1 - dist / mouseDist)})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-      }
+          ctx.beginPath();
+          ctx.arc(drawX, drawY, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${s.color}, ${alpha})`;
+          ctx.shadowColor = `rgba(${s.color}, ${Math.min(alpha + 0.2, 0.95)})`;
+          ctx.shadowBlur = cfg.glow;
+          ctx.fill();
+        });
+      });
+      ctx.shadowBlur = 0;
 
       raf = requestAnimationFrame(step);
     }
