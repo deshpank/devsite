@@ -1,80 +1,74 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Magnetic from './Magnetic';
+import ParticleField from './ParticleField';
 
-const line1 = ['I', 'build', 'AI', 'systems', 'for', 'the', 'moments', 'they'];
-const line2 = ["can't", 'get', 'wrong.'];
+const firstName = 'Kimaya';
+const lastName = 'Deshpande';
+const tagline = 'Blinking, thinking, clicking away';
 
-function Word({ word, index, italic = false, baseDelay = 0.1 }) {
-  return (
-    <span style={{ display: 'inline-block', overflow: 'hidden', paddingBottom: '0.12em', marginRight: '0.28em' }}>
+function Letters({ text, baseDelay }) {
+  return text.split('').map((ch, i) => (
+    <span key={i} style={{ display: 'inline-block', overflow: 'hidden' }}>
       <motion.span
-        style={{ display: 'inline-block', fontStyle: italic ? 'italic' : 'normal', color: italic ? 'var(--moss)' : 'inherit' }}
-        initial={{ y: '115%', rotate: 5 }}
+        style={{ display: 'inline-block' }}
+        initial={{ y: '120%', rotate: 6 }}
         animate={{ y: 0, rotate: 0 }}
-        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: baseDelay + index * 0.045 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: baseDelay + i * 0.028 }}
       >
-        {word}
+        {ch === ' ' ? '\u00A0' : ch}
       </motion.span>
     </span>
-  );
+  ));
 }
 
 export default function Hero() {
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const blobY = useTransform(scrollYProgress, [0, 1], [0, 160]);
-  const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const nameScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
 
   return (
-    <header id="top" className="hero" ref={heroRef}>
-      <motion.div className="hero-blob" style={{ y: blobY }} aria-hidden="true" />
+    <header id="top" className="hero hero-intro" ref={heroRef}>
+      <ParticleField />
 
-      <motion.div
-        className="hero-eyebrow"
-        style={{ opacity: fade }}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-      >
-        <span className="dot" />
-        <span className="eyebrow">Kimaya Deshpande — CS, Purdue '27</span>
-      </motion.div>
+      <motion.div className="hero-intro-inner" style={{ opacity: fade, scale: nameScale }}>
+        <motion.span
+          className="hero-intro-eyebrow eyebrow"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          Software Engineer · Purdue CS '27
+        </motion.span>
 
-      <motion.h1 style={{ opacity: fade }}>
-        <div>
-          {line1.map((w, i) => (
-            <Word word={w} index={i} key={w + i} />
-          ))}
-        </div>
-        <div>
-          {line2.map((w, i) => (
-            <Word word={w} index={line1.length + i} italic={w === "can't"} key={w + i} />
-          ))}
-        </div>
-      </motion.h1>
+        <h1 className="hero-name">
+          <span className="hero-name-line">
+            <Letters text={firstName} baseDelay={0.2} />
+          </span>
+          <span className="hero-name-line hero-name-line-accent">
+            <Letters text={lastName} baseDelay={0.2 + firstName.length * 0.028 + 0.08} />
+          </span>
+        </h1>
 
-      <motion.p
-        className="hero-sub"
-        style={{ opacity: fade }}
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: 'easeOut', delay: 0.65 }}
-      >
-        Software engineer working across multi-agent architectures, healthcare AI, and
-        LLM privacy research — from clinical pipelines at Humana to profiling-attack
-        research in the lab.
-      </motion.p>
+        <motion.p
+          className="hero-tagline"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.95 }}
+        >
+          {tagline}
+        </motion.p>
 
-      <motion.div
-        className="hero-actions"
-        style={{ opacity: fade }}
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: 'easeOut', delay: 0.78 }}
-      >
-        <Magnetic as="a" href="#projects" className="btn btn-primary">View projects</Magnetic>
-        <Magnetic as="a" href="#contact" className="btn btn-ghost">Get in touch</Magnetic>
+        <motion.div
+          className="hero-actions"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: 'easeOut', delay: 1.1 }}
+        >
+          <Magnetic as="a" href="#projects" className="btn btn-primary">View projects</Magnetic>
+          <Magnetic as="a" href="#contact" className="btn btn-ghost">Get in touch</Magnetic>
+        </motion.div>
       </motion.div>
 
       <motion.div className="hero-scroll" style={{ opacity: fade }}>

@@ -55,15 +55,83 @@
 }
 
 /* ===== Hero ===== */
-.hero {
-  min-height: 100svh;
+.hero-intro {
+  max-width: none;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  overflow: hidden;
+}
+
+.particle-field {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  cursor: default;
+}
+
+.hero-intro-inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.hero-intro-inner > * {
+  pointer-events: auto;
+}
+
+.hero-intro-eyebrow {
+  margin-bottom: 1.6rem;
+}
+
+.hero-name {
+  font-size: clamp(3.4rem, 12vw, 8.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.hero-name-line {
+  display: block;
+}
+
+.hero-name-line-accent {
+  font-style: italic;
+  color: var(--moss);
+}
+
+.hero-tagline {
+  margin-top: 1.8rem;
+  font-family: var(--mono);
+  font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
+}
+
+.hero-intro .hero-actions {
+  margin-top: 2.6rem;
   justify-content: center;
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 8rem 2rem 4rem;
-  position: relative;
+}
+
+.hero-intro .hero-scroll {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 640px) {
+  .hero-intro {
+    padding: 3rem 1.2rem;
+  }
+  .hero-intro .hero-scroll {
+    display: none;
+  }
 }
 
 .hero-eyebrow {
