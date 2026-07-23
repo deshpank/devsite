@@ -40,7 +40,7 @@ export default function Hero() {
           >
             Building things
             <span className="hero-headline-line2">
-              for <TypingWord words={heroPhrases} />
+            <TypingWord words={heroPhrases} />
             </span>
           </motion.h1>
 
