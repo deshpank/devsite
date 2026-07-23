@@ -1,12 +1,12 @@
 import Reveal from './Reveal';
 import { involvement } from '../data';
 
-export default function Involvement() {
+export default function Volunteering() {
   return (
-    <section id="involvement" className="section">
+    <section id="volunteering" className="section">
       <Reveal className="section-head">
         <span className="eyebrow">Beyond the code</span>
-        <h2>Leadership & involvement.</h2>
+        <h2>Volunteering & leadership.</h2>
       </Reveal>
 
       <div className="involvement-list">

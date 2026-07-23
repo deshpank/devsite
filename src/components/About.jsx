@@ -6,7 +6,7 @@ export default function About() {
     <section id="about" className="section">
       <Reveal className="section-head">
         <span className="eyebrow">About</span>
-        <h2>Systems that impact real people's data.</h2>
+        <h2>Systems that touch real people's data.</h2>
       </Reveal>
 
       <div className="about-grid">
@@ -37,7 +37,6 @@ export default function About() {
             <div className="about-fact">
               <dt>Studying</dt>
               <dd>B.S. Computer Science, Math minor — {profile.school}</dd>
-              <dd> Minor: Math, Certs: Data Science, Entrepreneurship and Innovation</dd>
             </div>
             <div className="about-fact">
               <dt>Graduating</dt>

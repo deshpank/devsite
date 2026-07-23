@@ -12,7 +12,7 @@ export const experience = [
   {
     role: 'Enterprise AI Software Intern',
     org: 'Humana',
-    mark: { text: 'H', color: '#3f5138' },
+    mark: { text: 'H', color: '#3f5138', domain: 'humana.com' },
     date: 'May 2026 — Aug 2026',
     tags: ['LangGraph', 'Azure DevOps', 'Multi-Hop'],
     points: [
@@ -24,7 +24,7 @@ export const experience = [
   {
     role: 'Software Developer',
     org: 'CATME',
-    mark: { text: 'C', color: '#8a6b2f' },
+    mark: { text: 'C', color: '#8a6b2f', domain: 'catme.org' },
     date: 'Jan 2026 — Present',
     tags: ['Perl', 'SQL', 'Zendesk'],
     points: [
@@ -35,8 +35,8 @@ export const experience = [
   },
   {
     role: 'Research Assistant',
-    org: 'Tech Justice Lab',
-    mark: { text: 'TJ', color: '#3d4f6b' },
+    org: 'Tech Justice Lab — LLM Privacy & Profiling',
+    mark: { text: 'TJ', color: '#3d4f6b', domain: 'purdue.edu' },
     date: 'Nov 2025 — Present',
     tags: ['Privacy Research', 'LLM Agents'],
     points: [
@@ -48,7 +48,7 @@ export const experience = [
   {
     role: 'Student Developer',
     org: 'Dow Chemical — Data Mine Corporate Partners',
-    mark: { text: 'D', color: '#7a3b30' },
+    mark: { text: 'D', color: '#7a3b30', domain: 'dow.com' },
     date: 'Aug 2025 — May 2026',
     tags: ['DSPy', 'FastAPI', 'Docker'],
     points: [
@@ -60,7 +60,7 @@ export const experience = [
   {
     role: 'Software Intern',
     org: 'DataGenie',
-    mark: { text: 'DG', color: '#4a4536' },
+    mark: { text: 'DG', color: '#4a4536', domain: 'datagenie.ai' },
     date: 'May 2025 — Aug 2025',
     tags: ['n8n', 'Encryption'],
     points: [
@@ -156,4 +156,19 @@ export const involvement = [
     date: 'Mar 2025 — Dec 2025',
     note: "Organized community outreach events including Science Sunday and card-making for retirement homes.",
   },
+];
+
+export const courses = [
+  { name: 'Data Structures and Algorithms', note: 'Core CS coursework' },
+  { name: 'Object Oriented Programming', note: 'Core CS coursework' },
+  { name: 'Advanced C', note: 'Systems-level programming' },
+  { name: 'Computer Architecture', note: 'Systems-level programming' },
+  { name: 'Systems Programming', note: 'Operating systems, memory, concurrency' },
+  { name: 'Artificial Intelligence', note: 'Core CS coursework' },
+];
+
+export const techStack = [
+  'C', 'C++', 'Python', 'Java', 'JavaScript', 'SQL', 'Bash', 'Perl',
+  'React', 'Node.js', 'FastAPI', 'Flask', 'LangGraph', 'n8n',
+  'Docker', 'Git', 'Azure DevOps', 'DuckDB', 'Databricks', 'Pandas',
 ];

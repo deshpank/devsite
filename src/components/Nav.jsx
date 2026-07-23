@@ -2,6 +2,9 @@ const links = [
   ['About', '#about'],
   ['Experience', '#experience'],
   ['Projects', '#projects'],
+  ['Volunteering', '#volunteering'],
+  ['Tech Stack', '#tech-stack'],
+  ['Courses', '#courses'],
   ['Contact', '#contact'],
 ];
 

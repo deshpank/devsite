@@ -85,6 +85,7 @@ button {
   margin: 0 auto;
   padding: 7rem 2rem;
   position: relative;
+  scroll-margin-top: 5rem;
 }
 
 .section-head {
