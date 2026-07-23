@@ -15,12 +15,11 @@ export const stats = [
 ];
 
 export const heroPhrases = [
-  'with AI',
-  'for healthcare',
-  'to protect privacy',
-  'that scale',
-  'to learn',
-  'to explore',
+  'healthcare.',
+  "people's privacy.",
+  'production.',
+  'scale.',
+  'the edge cases.',
 ];
 
 export const heroBio =

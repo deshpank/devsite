@@ -40,8 +40,9 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           >
             Building things
-            <br />
-            <TypingWord words={heroPhrases} />
+            <span className="hero-headline-line2">
+              for <TypingWord words={heroPhrases} />
+            </span>
           </motion.h1>
 
           <motion.p
