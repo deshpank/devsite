@@ -9,7 +9,7 @@ export default function PhotoRing() {
         <circle cx="160" cy="160" r="122" strokeDasharray="4 10" />
       </svg>
       <div className="photo-frame">
-        <img src="\photo_of_me_copy.jpeg" alt="Kimaya Deshpande" />
+        <img src="C:\Users\imkim\Downloads\devsite\src\components\photo_of_me_copy.jpeg" alt="Kimaya Deshpande" />
       </div>
     </div>
   );
