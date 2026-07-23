@@ -9,9 +9,7 @@ export default function PhotoRing() {
         <circle cx="160" cy="160" r="122" strokeDasharray="4 10" />
       </svg>
       <div className="photo-frame">
-        {/* Drop your photo in here — swap this block for <img src="/your-photo.jpg" alt="Kimaya Deshpande" /> */}
-        <span className="photo-frame-icon">◎</span>
-        <span className="photo-frame-placeholder">Your photo goes here</span>
+        <img src="\photo_of_me_copy.jpeg" alt="Kimaya Deshpande" />
       </div>
     </div>
   );
