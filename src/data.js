@@ -15,17 +15,23 @@ export const stats = [
 ];
 
 export const heroPhrases = [
-  'healthcare.',
-  "people's privacy.",
-  'production.',
-  'scale.',
-  'the edge cases.',
+  'that impact.',
+  'that innovate.',
+  "for privacy.",
+  'for production.',
+  'for research.',
+  'for healthcare',
+  'for education',
+  'that scale.',
+  'that optimize.',
+  'to learn.',
+  'to explore.',
 ];
 
 export const heroBio =
-  "I'm Kimaya — I build AI systems that handle the data people actually care about: clinical measures, insurance claims, their own digital footprints. Currently working across Humana and CATME. CS student at Purdue, and almost everything I build runs on AI — I can't help myself.";
+  "Hi! I'm Kimaya, a CS student and Jandos Scholar at Purdue, currently working at Humana and CATME.  I like to build software, web applications, and AI systems that have a real impact on the community through healthcare, education, and privacy. Off the clock I'm watching F1 or eating cake.";
 
-export const experience = [
+  export const experience = [
   {
     role: 'Enterprise AI Software Intern',
     org: 'Humana',

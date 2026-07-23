@@ -21,7 +21,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.05 }}
           >
             <span className="hero-badge-dot" />
-            Open to internships · SWE &amp; AI/ML · '27
+            KIMAYA DESHPANDE · SWE + CS + AI/ML · '27
           </motion.span>
 
           <motion.span
@@ -30,7 +30,6 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            // kimaya deshpande
           </motion.span>
 
           <motion.h1
